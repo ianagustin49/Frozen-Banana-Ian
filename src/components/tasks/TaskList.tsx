@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { ScheduledTask } from '../../types/models';
 import TaskItem from './TaskItem';
 
@@ -8,6 +9,15 @@ interface Props {
   emptyHint?: string;
 }
 
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0 },
+};
+
 export default function TaskList({ items, date, areaColor, emptyHint }: Props) {
   if (items.length === 0) {
     return (
@@ -17,10 +27,12 @@ export default function TaskList({ items, date, areaColor, emptyHint }: Props) {
     );
   }
   return (
-    <div className="space-y-2">
+    <motion.div className="space-y-2" variants={container} initial="hidden" animate="show">
       {items.map((s) => (
-        <TaskItem key={s.task.id} scheduled={s} date={date} areaColor={areaColor} />
+        <motion.div key={s.task.id} variants={item} layout>
+          <TaskItem scheduled={s} date={date} areaColor={areaColor} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

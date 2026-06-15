@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useAppStore } from '../../store/useAppStore';
 import { dayCompletion, tasksForDate } from '../../store/selectors';
 import { levelProgress } from '../../lib/xp';
@@ -12,7 +13,7 @@ function Ring({ pct }: { pct: number }) {
   return (
     <svg width="44" height="44" viewBox="0 0 44 44" className="shrink-0 -rotate-90">
       <circle cx="22" cy="22" r={r} fill="none" stroke="currentColor" strokeWidth="4" className="text-slate-200 dark:text-slate-700" />
-      <circle
+      <motion.circle
         cx="22"
         cy="22"
         r={r}
@@ -21,8 +22,10 @@ function Ring({ pct }: { pct: number }) {
         strokeWidth="4"
         strokeLinecap="round"
         strokeDasharray={c}
-        strokeDashoffset={c - (c * pct) / 100}
-        className="text-emerald-500 transition-all duration-500"
+        className="text-emerald-500"
+        initial={{ strokeDashoffset: c }}
+        animate={{ strokeDashoffset: c - (c * pct) / 100 }}
+        transition={{ type: 'spring', stiffness: 80, damping: 18 }}
       />
     </svg>
   );
@@ -38,7 +41,12 @@ export default function XpHeader() {
   return (
     <div className="rounded-3xl border border-slate-100 bg-white p-4 shadow-soft dark:border-slate-800 dark:bg-slate-900">
       <div className="flex items-center gap-4">
-        <LevelBadge level={game.level} size="lg" />
+        <motion.div
+          animate={{ scale: [1, 1.06, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <LevelBadge level={game.level} size="lg" />
+        </motion.div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between">
             <p className="text-sm font-bold text-slate-700 dark:text-slate-200">Level {game.level}</p>

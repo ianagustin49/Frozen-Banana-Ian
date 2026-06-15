@@ -44,7 +44,10 @@ export default function TaskItem({ scheduled, date, areaColor }: Props) {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white px-3 py-2.5 shadow-soft transition-colors dark:border-slate-800 dark:bg-slate-900">
+    <div
+      className="rounded-2xl border border-l-[5px] border-slate-100 bg-white px-3 py-2.5 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card dark:border-slate-800 dark:bg-slate-900"
+      style={{ borderLeftColor: areaColor }}
+    >
       <div className="flex items-center gap-3">
         <button
           onClick={toggle}
@@ -100,7 +103,8 @@ export default function TaskItem({ scheduled, date, areaColor }: Props) {
               {task.title}
             </p>
           )}
-          <p className="mt-0.5 text-xs text-slate-400">
+          <p className="mt-0.5 flex items-center gap-1.5 text-xs text-slate-400">
+            <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: areaColor }} />
             {recurrenceLabel(task)} · {task.xp} XP
           </p>
         </div>

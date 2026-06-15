@@ -2,14 +2,14 @@
   "name": "Frozen Banana — Daily Tracker",
   "short_name": "Frozen Banana",
   "description": "Ian's gamified daily life & habit tracker.",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/Frozen-Banana-Ian/",
+  "scope": "/Frozen-Banana-Ian/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#6366f1",
   "icons": [
     {
-      "src": "./banana.svg",
+      "src": "/Frozen-Banana-Ian/banana.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
